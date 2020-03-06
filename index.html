@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,user-scalable=no, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0"
+          name="viewport">
+    <title>BSNL USAGE</title>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/main.js"></script>
+    <link href="styles/applayout.css" rel="stylesheet">
+    <script src="js/motion.js"></script>
+    <link href="styles/circleProgress.css" rel="stylesheet">
+    <link rel="manifest" href="json/manifest.json">
+    <link rel="icon" type="image/png" href="./img/icons/favicon.png" />
+    <meta name="theme-color" content="white" />
+    <!-- iOS -->
+    <link rel="apple-touch-icon" href="./img/icons/icon-144x144.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-title" content="PWAConf" />
+</head>
+<body id = "bodyId">
+<div class="alert" role="alert" hidden>
+    Your browser does not support ServiceWorker. The app will not be available
+    offline.
+</div>
+
+<div class="formInitial" id="formInitial" style="display: none">
+    <h1 class="formheading">Initial Setup</h1>
+    <hr>
+    <p class="Tooltip">ENTER YOUR DAILY QUOTA</p>
+    <div id="textAreaContainer">
+        <input id="initialQuota" name="Quota" placeholder="0.00" type="number">
+    </div>
+    <div class="initialTabGroup">
+        <input checked="checked" class="hidden radio-label" id="KB-button" name="dataOption" type="radio" value="KB"/>
+        <label class="button-label" for="KB-button"
+               style="border-top-left-radius: 10px; border-bottom-left-radius:10px">
+            <h1>KB</h1>
+        </label>
+        <input class="hidden radio-label" id="MB-button" name="dataOption" type="radio" value="MB"/>
+        <label class="button-label" for="MB-button">
+            <h1>MB</h1>
+        </label>
+        <input class="hidden radio-label" id="GB-button" name="dataOption" type="radio" value="GB"/>
+        <label class="button-label" for="GB-button">
+            <h1>GB</h1>
+        </label>
+        <input class="hidden radio-label" id="TB-button" name="dataOption" type="radio" value="TB"/>
+        <label class="button-label" for="TB-button"
+               style="border-right: 2px solid dodgerblue; border-top-right-radius:10px;border-bottom-right-radius:10px ">
+            <h1>TB</h1>
+        </label>
+    </div>
+    <div class="iSaveButtonDiv">
+        <button id="iSAVEButton" type="button">SAVE</button>
+    </div>
+</div>
+<div class="overlay" id="overlay"></div>
+<div class="settings" id="settings" style="display: none">
+    <div id="settingsTopRow">
+        <h4 id="settingsHeading">Settings</h4>
+        <h4 id="settingDoneBtn">Done</h4>
+        <hr>
+        <p class="Tooltip">ENTER YOUR DAILY QUOTA</p>
+        <div id="settingsTextAreaContainer">
+            <input id="settingsInitialQuota" name="Quota" placeholder="0.00" type="number">
+        </div>
+        <!-- Tab Row For Settings Below-->
+        <div class="settingsInitialTabGroup">
+            <input checked="checked" class="hidden radio-label" id="set-KB-button" name="dataOption" type="radio"
+                   value="KB"/>
+            <label class="button-label" for="set-KB-button"
+                   style="border-top-left-radius: 10px; border-bottom-left-radius:10px">
+                <h1>KB</h1>
+            </label>
+            <input class="hidden radio-label" id="set-MB-button" name="dataOption" type="radio" value="MB"/>
+            <label class="button-label" for="set-MB-button">
+                <h1>MB</h1>
+            </label>
+            <input class="hidden radio-label" id="set-GB-button" name="dataOption" type="radio" value="GB"/>
+            <label class="button-label" for="set-GB-button">
+                <h1>GB</h1>
+            </label>
+            <input class="hidden radio-label" id="set-TB-button" name="dataOption" type="radio" value="TB"/>
+            <label class="button-label" for="set-TB-button"
+                   style="border-right: 2px solid dodgerblue; border-top-right-radius:10px;border-bottom-right-radius:10px ">
+                <h1>TB</h1>
+            </label>
+        </div>
+        <div class="iSaveButtonDiv">
+            <button id="set-iSAVEButton" type="button">SAVE</button>
+        </div>
+        <hr style="margin-top: 5vh;">
+        <div class="currentDataStatus">
+            <h2 id="txtCurrentDataPlan">Current Data Plan :</h2>
+            <h2 id="totalDataPlanCurrent"></h2>
+        </div>
+        <hr>
+        <div class="iSaveButtonDiv">
+            <button id="set-iREFRESHButton" onclick="reloadPage();" type="button">FORCE REFRESH</button>
+        </div>
+    </div>
+</div>
+
+<div class="mypanel">
+    <div class="mainRow1">
+        <h2 id="mainHeading">USAGE</h2>
+        <img id="settingsBtn" src="img/settings tool icon.png"/></div>
+    <hr style="margin-block-end: 0;">
+    <div class="connectivityDiv">
+        <h2 id="txtConnect">Status :</h2>
+        <h2 id="connectStatus">CONNECT TO BSNL WIFI</h2>
+    </div>
+    <hr style="margin-block-start: 0;">
+    <div class="gradientPanel" id = "gradientPanel">
+        <div data-pct="0" id="cont">
+            <svg id="svg" version="1.1" viewPort="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+
+                    <filter height="300%" id="sofGlow" width="300%" x="-75%" y="-75%">
+                        <!-- Thicken out the original shape -->
+                        <feMorphology in="SourceAlpha" operator="dilate" radius="4" result="thicken"/>
+
+                        <!-- Use a gaussian blur to create the soft blurriness of the glow -->
+                        <feGaussianBlur in="thicken" result="blurred" stdDeviation="10"/>
+
+                        <!-- Change the colour -->
+                        <feFlood flood-color="white" result="glowColor"/>
+
+                        <!-- Color in the glows -->
+                        <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored"/>
+
+                        <!--	Layer the effects together -->
+                        <feMerge>
+                            <feMergeNode in="softGlow_colored"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+
+                    </filter>
+
+                </defs>
+                <circle cx="50%" cy="50%" fill="transparent" r="120" stroke-dasharray="753"
+                        stroke-dashoffset="0" opacity="0.09" ></circle>
+                <circle cx="50%" cy="50%" fill="transparent" filter="url(#sofGlow)" id="bar" r="120"
+                        stroke-dasharray="753" stroke-dashoffset="0" ></circle>
+            </svg>
+            <div class = "panelDataShow"></div>
+        </div>
+    </div>
+    <div id="extraInfo">
+        <div id="serviceStatus" class = "bottomOptions">STATUS</div>
+        <div id="totalDownload" class = "bottomOptions">Total Download</div>
+        <div id="totalUpload" class = "bottomOptions">Total Upload</div>
+        <div id="totalDataUsage" class = "bottomOptions">Total Data Usage</div>
+        <div id="serviceType" class = "bottomOptions">Service Type</div>
+    </div>
+</div>
+</body>
+<script>
+    document.getElementById("iSAVEButton").onclick = function () {
+        totalVal = document.getElementById("initialQuota").value;
+        if (document.getElementById('KB-button').checked) {
+            selectedOp = "KB";
+        } else if (document.getElementById('MB-button').checked) {
+            selectedOp = "MB";
+        } else if (document.getElementById('GB-button').checked) {
+            selectedOp = "GB";
+        } else if (document.getElementById('TB-button').checked) {
+            selectedOp = "TB";
+        }
+        document.getElementById("formInitial").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+        addMaxValue()
+    };
+    //VALUES FOR SETTINGS SECTION BELOW
+    document.getElementById("set-iSAVEButton").onclick = function () {
+        totalVal = document.getElementById("settingsInitialQuota").value;
+        if (document.getElementById('set-KB-button').checked) {
+            selectedOp = "KB";
+        } else if (document.getElementById('set-MB-button').checked) {
+            selectedOp = "MB";
+        } else if (document.getElementById('set-GB-button').checked) {
+            selectedOp = "GB";
+        } else if (document.getElementById('set-TB-button').checked) {
+            selectedOp = "TB";
+        }
+        addMaxValue()
+    };
+
+    function reloadPage() {
+        location.reload(true);
+
+    }
+
+</script>
+<script src="./app.js"></script>
+</html>
