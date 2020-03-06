@@ -108,14 +108,14 @@ $(document).ready(function () {
         function fetchdata() {
             $.ajax({
                 //Replace the JSON url with : http://172.30.110.25:8090/ssssportal/fetchUserQuotaPM.do
-                url: 'http://172.30.110.25:8090/ssssportal/fetchUserQuotaPM.do',
+                url: 'js/response.json',
                 type: 'post',
                 datatype : "json",
                 mtype : 'POST',
                 success: function (response) {
                     // Perform operation on the return value
                     //Replace the JSON url with : http://172.30.110.25:8090/ssssportal/fetchUserQuotaPM.do
-                    $.getJSON('http://172.30.110.25:8090/ssssportal/fetchUserQuotaPM.do', function (data) {
+                    $.getJSON('js/response.json', function (data) {
 
                         usageLiteral = data.rows[0].dailyUsedOctets;
                         console.log("Pulled Usage = " + usageLiteral);
