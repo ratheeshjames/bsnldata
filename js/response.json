@@ -1,0 +1,19 @@
+{
+  "total": 1,
+  "resultCode": 200,
+  "records": 1,
+  "msg": "Success",
+  "rows": [
+    {
+      "dailyUsedOctets": "989 MB",
+      "serviceStatus": "ACTIVE",
+      "usage": null,
+      "downloadOctets": "17.22 GB",
+      "uploadOctets": "844.77 MB",
+      "serviceType": "Base",
+      "totalOctets": "18.04 GB",
+      "serviceExpiry": "31\/12\/9999",
+      "serviceName": "I-H-DLY-8MB-2G-1MB-M"
+    }
+  ]
+}

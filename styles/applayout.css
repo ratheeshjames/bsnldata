@@ -1,0 +1,369 @@
+body {
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+#bodyId{
+    overflow: auto;
+}
+
+.mypanel {
+    display: block;
+    position: absolute;
+    width: 100vw;
+    right: 0vw;
+    top: 0vh;
+    background-color: white;
+    text-align: center;
+    z-index: 1;
+    border-radius: 0;
+    transition: background-color 0.5s, border-radius 0.8s, width 0.8s, height 0.8s, top 0.8s, right 0.8s;
+    transition-timing-function: ease-in-out;
+
+}
+
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.72);
+    backdrop-filter: saturate(1.8) blur(10px);
+    color: rgb(29, 29, 31);
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#formInitial {
+    display: flex;
+    position: absolute;
+    width: 90vw;
+    left: 5vw;
+    height: 66.67vh;
+    top: 16.67vh;
+    background-color: white;
+    border-radius: 3vw;
+    z-index: 3;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.formheading{
+    font-family: SF Pro Display, Arial,sans-serif;
+    width: 100%;
+    padding-left: 5vw;
+    font-size: 10vw;
+}
+.Tooltip{
+    font-family: SF Pro Text, Arial, sans-serif;
+    font-style: normal;
+    width: 100%;
+    padding-left: 5vw;
+    font-size: 3.5vw;
+    color: black;
+    margin-top: 2vh;
+    margin-bottom: 0;
+}
+#textAreaContainer{
+    display: flex;
+    font-family: SF Pro Display, Arial,sans-serif;
+    width: 100%;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    font-size: 10vw;
+    height: 15vh;
+    margin-top: 2vh;
+}
+#settingsTextAreaContainer{
+    display: flex;
+    font-family: SF Pro Display, Arial,sans-serif;
+    width: 100%;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    font-size: 10vw;
+    height: 15vh;
+    margin-top: 2vh;
+}
+#initialQuota{
+    font-family: SF Pro Text, Arial, sans-serif;
+    font-style: normal;
+    font-size: 10vh;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border-left:0;
+    border-top:0;
+    border-right: 0;
+    border-bottom: 1px solid gray;
+    overflow: hidden;
+}
+#settingsInitialQuota{
+    font-family: SF Pro Text, Arial, sans-serif;
+    font-style: normal;
+    font-size: 10vh;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border-left:0;
+    border-top:0;
+    border-right: 0;
+    border-bottom: 1px solid gray;
+    overflow: hidden;
+}
+
+.initialTabGroup{
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.settingsInitialTabGroup{
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.button-label {
+    background: #efefef;
+    border-top: 2px solid dodgerblue;
+    border-bottom: 2px solid dodgerblue;
+    border-left: 2px solid dodgerblue;
+    font-family: SF Pro Text, Arial, sans-serif;
+    font-style: normal;
+    font-size: 2vw;
+    width: 20vw;
+    height: 5vh;
+    color: dodgerblue;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+#KB-button:checked + .button-label {
+    background: dodgerblue;
+    color: #efefef;
+}
+#MB-button:checked + .button-label {
+    background: dodgerblue;
+    color: #efefef;
+}
+#GB-button:checked + .button-label {
+    background: dodgerblue;
+    color: #efefef;
+}
+#TB-button:checked + .button-label {
+    background: dodgerblue;
+    color: #efefef;
+}
+/* Settings Button Values*/
+#set-KB-button:checked + .button-label {
+    background: dodgerblue;
+    color: #efefef;
+}
+#set-MB-button:checked + .button-label {
+    background: dodgerblue;
+    color: #efefef;
+}
+#set-GB-button:checked + .button-label {
+    background: dodgerblue;
+    color: #efefef;
+}
+#set-TB-button:checked + .button-label {
+    background: dodgerblue;
+    color: #efefef;
+}
+.hidden {
+    display: none;
+}
+.iSaveButtonDiv{
+    margin-top: 4vh;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+#iSAVEButton, #set-iSAVEButton{
+    font-family: SF Pro Text, Arial, sans-serif;
+    font-style: normal;
+    font-size: 5vw;
+    height: 6vh;
+    width: 60vw;
+    background: white;
+    border: 2px solid dodgerblue;
+    border-radius: 10px;
+    color: dodgerblue;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    outline: none;
+}
+#set-iREFRESHButton{
+    font-family: SF Pro Text, Arial, sans-serif;
+    font-style: normal;
+    font-size: 5vw;
+    height: 6vh;
+    width: 60vw;
+    background: dodgerblue;
+    border: 2px solid dodgerblue;
+    border-radius: 10px;
+    color: white;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    outline: none;
+}
+#iSAVEButton, #set-iSAVEButton:hover{
+    background: dodgerblue;
+    color: white;
+}
+
+.mainRow1{
+    display: flex;
+    width: 100%;
+    height: 15vh;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+#mainHeading {
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-size: 10vw;
+    text-align: left;
+    padding-left: 6vw;
+}
+#settingsBtn{
+    width: 10vw;
+    height: 10vw;
+    margin-left: 40%;
+    transition: all 0.8s ease-in;
+}
+
+.settings {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 100vh;
+    background-color: white;
+    z-index: 2;
+    border-top-left-radius: 5vw;
+    border-top-right-radius: 5vw;
+    transition: all 0.5s ;
+
+}
+#settingsTopRow{
+    font-family: SF Pro Text, Arial, sans-serif;
+    font-style: normal;
+    font-size: 5vw;
+    width: 100%;
+    height: 8vh;
+}
+#settingsHeading{
+    text-align: center;
+    color: black;
+}
+#settingDoneBtn{
+    color: dodgerblue;
+    position: absolute;
+    right: 4vw;
+    top: 0vh;
+}
+.currentDataStatus {
+    display: flex;
+    flex-direction: row;
+    padding-left: 3vh;
+    font-size: 3vw;
+}
+#totalDataPlanCurrent{
+    color: dodgerblue;
+    margin-left: 5vw;
+}
+.connectivityDiv{
+    font-family: SF Pro Text, Arial, sans-serif;
+    font-style: normal;
+    font-size: 3vw;
+    display: flex;
+    flex-direction: row;
+    padding-left: 3vh;
+}
+#connectStatus{
+    color: #b7b7b7;
+    padding-left: 3vh;
+}
+.gradientPanel{
+    width: 90vw;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 5%);
+    height: 50vh;
+    background-color: firebrick;
+    border-radius: 4vw;
+    background-image: linear-gradient(to bottom right, #E3E3E3, #5D6874);
+}
+.gradientPanel::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: -30px;
+    left: 2%;
+    height: 110%;
+    width: 95%;
+    opacity: 0.8;
+    border-radius: 50px;
+    background: inherit;
+    -webkit-filter: blur(6px);
+    -moz-filter: blur(6px);
+    -o-filter: blur(6px);
+    -ms-filter: blur(6px);
+    filter: blur(30px);
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+.panelDataShow{
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    top: 24vh;
+    font-size: 4vw;
+    color: white;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%,190%);
+}
+#extraInfo {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60vh;
+}
+.bottomOptions{
+    display: flex;
+    font-size: 5vw;
+    align-items: center;
+    font-family: "SF Pro Text 600", Arial,sans-serif;
+    font-style: normal;
+    width: 80%;
+    height: 10vh;
+    background-color: white;
+    margin-top: 2vh;
+    margin-left: 10%;
+    margin-bottom: 2vh;
+    padding-left: 5vw;
+    border-radius: 4vw;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.alert {
+    background: hotpink;
+}
